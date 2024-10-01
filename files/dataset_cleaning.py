@@ -1,10 +1,22 @@
 import numpy as np
 import pandas as pd
 
-commentsLink_17Jan = "../dataset/CommentsJan2017.csv"
+
 articlesLink_17Jan = "../dataset/ArticlesJan2017.csv"
+commentsLink_17Jan = "../dataset/CommentsJan2017.csv"
 
-article = pd.read_csv(articlesLink_17Jan)
-print(article.shape)
 
-print(article.head())
+articles_17Jan = pd.read_csv(articlesLink_17Jan)
+art_17Jan_Sub = articles_17Jan[['articleID', 'headline', 'keywords', 'sectionName', 'articleWordCount', 'pubDate']]
+
+
+comments_17Jan = pd.read_csv(commentsLink_17Jan, low_memory=False)
+com_17Jan_Sub = comments_17Jan[['articleID', 'commentBody', 'approveDate']]
+print(art_17Jan_Sub.shape)
+print(com_17Jan_Sub.shape)
+
+comment_count_per_article = com_17Jan_Sub.groupby('articleID').size().to_dict()
+
+art_17Jan_Sub.loc[:, 'commentCount'] = art_17Jan_Sub['articleID'].map(comment_count_per_article).fillna(0).astype(int)
+
+print(art_17Jan_Sub.head())
