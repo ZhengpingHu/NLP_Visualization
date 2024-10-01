@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 articlesLink_17Jan = "../dataset/ArticlesJan2017.csv"
 commentsLink_17Jan = "../dataset/CommentsJan2017.csv"
@@ -17,6 +17,23 @@ print(com_17Jan_Sub.shape)
 
 comment_count_per_article = com_17Jan_Sub.groupby('articleID').size().to_dict()
 
+
 art_17Jan_Sub.loc[:, 'commentCount'] = art_17Jan_Sub['articleID'].map(comment_count_per_article).fillna(0).astype(int)
 
-print(art_17Jan_Sub.head())
+
+sorted_articles = art_17Jan_Sub.sort_values(by='commentCount', ascending=False)
+
+
+top_article_features = sorted_articles[['headline', 'keywords', 'commentCount']]
+
+
+print(top_article_features)
+
+plt.figure(figsize=(10, 6))
+plt.bar(top_article_features['headline'], top_article_features['commentCount'], color='blue')
+plt.title('Top Article Comment Count')
+plt.xlabel('Headline')
+plt.ylabel('Comment Count')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
