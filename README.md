@@ -15,3 +15,6 @@ app.py requires llama 3.2 model, installation process at: https://ollama.com/lib
 
 for spaCy:
 Use the command: python -m spacy download en_core_web_sm to install the local English model.
+
+for Templates:
+free download from website: https://html.design/
