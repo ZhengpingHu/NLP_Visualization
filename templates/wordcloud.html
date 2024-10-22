@@ -17,18 +17,17 @@
     <link href="../static/css/responsive.css" rel="stylesheet" />
 
     <style>
-        /* 图片居中并限制宽度为屏幕的 70% */
         .wordcloud-container {
             display: flex;
-            justify-content: center;  /* 水平居中 */
-            align-items: center;      /* 垂直居中 */
-            height: 100vh;            /* 让容器充满整个屏幕高度 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .wordcloud-container img {
-            width: 70vw;              /* 图片宽度为屏幕宽度的 70% */
-            height: auto;             /* 保持图片的宽高比 */
-            max-height: 80vh;         /* 限制图片最大高度为屏幕高度的 80% */
+            width: 70vw; 
+            height: auto; 
+            max-height: 80vh;
         }
     </style>
 </head>
@@ -71,7 +70,6 @@
         <!-- end header section -->
 
     <div class="container wordcloud-container">
-        <!-- 居中的 WordCloud 图片 -->
         <img src="{{ url_for('static', filename='myplot.png') }}" alt="Sentiment Word Cloud" />
     </div>
 
