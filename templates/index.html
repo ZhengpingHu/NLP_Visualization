@@ -1,21 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Llama Poem Query</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>CSCI 6612 NLP Visualization</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+    <!-- fonts awesome style -->
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="../static/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../static/css/responsive.css" rel="stylesheet" />
 </head>
+
 <body>
-    <h1>Llama Poem Query</h1>
-    
-    <form action="/submit-poem" method="POST">
-        <label for="poem">Enter your poem or text:</label><br>
-        <textarea id="poem" name="poem" rows="4" cols="50" placeholder="Enter your poem or text here..."></textarea><br>
-        <input type="submit" value="Submit">
-    </form>
-    
-    {% if error %}
-    <p style="color: red;">{{ error }}</p>
-    {% endif %}
+    <div class="hero_area">
+        <!-- header section starts -->
+        <header class="header_section">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+                <div class="custom_menu-btn">
+                    <button onclick="openNav()">
+                        <span class="s-1"> </span>
+                        <span class="s-2"> </span>
+                        <span class="s-3"> </span>
+                        <span class="s-4"> </span>
+                    </button>
+                </div>
+                <div id="myNav" class="overlay">
+                    <div class="menu_btn-style">
+                        <button onclick="closeNav()">
+                            <span class="s-1"> </span>
+                            <span class="s-2"> </span>
+                            <span class="s-3"> </span>
+                            <span class="s-4"> </span>
+                        </button>
+                    </div>
+                    <div class="overlay-content">
+                        <a class="active" href="/">Home</a>
+                        <a href="/">Overall Analysis</a>
+                        <a href="/specific">Specific Analysis</a>
+                        <a href="/wordcloud">WordCloud</a>
+                        <a href="/submit">Query</a>
+                    </div>
+                </div>
+                <a class="navbar-brand" href="/">
+                    <span>Demo</span>
+                </a>
+            </nav>
+        </header>
+        
+    </div>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <br>
+                <br>
+                <br>
+                <br>
+                <h3>Welcome to the NLP Visualization Demo</h3>
+                <p>
+                    This demo showcases a user-friendly interface for interacting with the Llama model. 
+                    You can explore various natural language processing techniques and submit your own text or poem to see how the model responds.
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
+
+
+    <!-- footer section -->
+    <footer class="footer_section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6">
+                    <p>&copy; <span id="displayYear"></span> All Rights Reserved. Design by <a href="https://html.design/">Free Html Templates</a></p>
+                </div>
+                <div class="col-xl-6">
+                    <div class="link_box">
+                        <a href="/">Home</a>
+                        <a href="/specific">Specific Result</a>
+                        <a href="/">Overall Result</a>
+                        <a href="/wordcloud">Word Cloud</a>
+                        <a href="/submit">Query By LLM</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer section -->
+
+    <script src="../static/css/jquery-3.4.1.min.js"></script>
+    <script src="../static/css/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="../static/css/custom.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+</body>
+
 </html>

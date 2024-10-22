@@ -1,20 +1,120 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Query Result</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Query Result - NLP Visualization</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+    <!-- fonts awesome style -->
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="../static/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../static/css/responsive.css" rel="stylesheet" />
 </head>
+
 <body>
-    <h1>Query Result</h1>
+    <div class="hero_area">
+        <!-- header section starts -->
+        <header class="header_section">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+                <div class="custom_menu-btn">
+                    <button onclick="openNav()">
+                        <span class="s-1"> </span>
+                        <span class="s-2"> </span>
+                        <span class="s-3"> </span>
+                        <span class="s-4"> </span>
+                    </button>
+                </div>
+                <div id="myNav" class="overlay">
+                    <div class="menu_btn-style">
+                        <button onclick="closeNav()">
+                            <span class="s-1"> </span>
+                            <span class="s-2"> </span>
+                            <span class="s-3"> </span>
+                            <span class="s-4"> </span>
+                        </button>
+                    </div>
+                    <div class="overlay-content">
+                        <a class="active" href="/">Home</a>
+                        <a href="/">Overall Analysis</a>
+                        <a href="/specific">Specific Analysis</a>
+                        <a href="/wordcloud">WordCloud</a>
+                        <a href="/submit">Query</a>
+                    </div>
+                </div>
+                <a class="navbar-brand" href="/">
+                    <span>Query Result</span>
+                </a>
+            </nav>
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <br>
+                <h3>Your Question:</h3>
+                <p>{{ poem }}</p>
+
+                <h3>Model Response:</h3>
+                <div id="response-container">
+                </div>
+
+                <a href="/submit" class="btn btn-primary mt-4">Back to Query</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer section -->
+    <footer class="footer_section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6">
+                    <p>&copy; <span id="displayYear"></span> All Rights Reserved. Design by <a href="https://html.design/">Free Html Templates</a></p>
+                </div>
+                <div class="col-xl-6">
+                    <div class="link_box">
+                        <a href="/">Home</a>
+                        <a href="/specific">Specific Result</a>
+                        <a href="/">Overall Result</a>
+                        <a href="/wordcloud">Word Cloud</a>
+                        <a href="/submit">Query By LLM</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const source = new EventSource("/stream/{{ poem }}");
+        const responseContainer = document.getElementById('response-container');
     
-    <h3>Your input:</h3>
-    <p>{{ poem }}</p>
-    
-    <h3>Llama API Response:</h3>
-    <p>{{ response }}</p>
-    
-    <a href="/">Go back</a>
+        source.onmessage = function(event) {
+            responseContainer.innerHTML += event.data + " ";
+            if (event.data === "[END]") {
+                source.close();
+            }
+        };
+
+        source.onerror = function() {
+            console.error("Error occurred during EventSource communication.");
+            source.close();
+        };
+    </script>
+    <script src="../static/css/jquery-3.4.1.min.js"></script>
+    <script src="../static/css/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="../static/css/custom.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
 </body>
 </html>

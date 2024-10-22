@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Sentiment Analysis - NLP Visualization</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <link href="../static/css/style.css" rel="stylesheet" />
+    <link href="../static/css/responsive.css" rel="stylesheet" />
+
+    <style>
+        /* 图片居中并限制宽度为屏幕的 70% */
+        .wordcloud-container {
+            display: flex;
+            justify-content: center;  /* 水平居中 */
+            align-items: center;      /* 垂直居中 */
+            height: 100vh;            /* 让容器充满整个屏幕高度 */
+        }
+
+        .wordcloud-container img {
+            width: 70vw;              /* 图片宽度为屏幕宽度的 70% */
+            height: auto;             /* 保持图片的宽高比 */
+            max-height: 80vh;         /* 限制图片最大高度为屏幕高度的 80% */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero_area">
+        <!-- header section starts -->
+        <header class="header_section">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+                <div class="custom_menu-btn">
+                    <button onclick="openNav()">
+                        <span class="s-1"> </span>
+                        <span class="s-2"> </span>
+                        <span class="s-3"> </span>
+                        <span class="s-4"> </span>
+                    </button>
+                </div>
+                <div id="myNav" class="overlay">
+                    <div class="menu_btn-style">
+                        <button onclick="closeNav()">
+                            <span class="s-1"> </span>
+                            <span class="s-2"> </span>
+                            <span class="s-3"> </span>
+                            <span class="s-4"> </span>
+                        </button>
+                    </div>
+                    <div class="overlay-content">
+                        <a class="active" href="/">Home</a>
+                        <a href="/">Overall Analysis</a>
+                        <a href="/specific">Specific Analysis</a>
+                        <a href="/wordcloud">WordCloud</a>
+                        <a href="/submit">Query</a>
+                    </div>
+                </div>
+                <a class="navbar-brand" href="index.html">
+                    <span>Naive Bayes + LLM Query</span>
+                </a>
+            </nav>
+        </header>
+        <!-- end header section -->
+
+    <div class="container wordcloud-container">
+        <!-- 居中的 WordCloud 图片 -->
+        <img src="{{ url_for('static', filename='myplot.png') }}" alt="Sentiment Word Cloud" />
+    </div>
+
+    <!-- footer section -->
+    <footer class="footer_section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6">
+                    <p>&copy; <span id="displayYear"></span> All Rights Reserved. Design by <a href="https://html.design/">Free Html Templates</a></p>
+                </div>
+                <div class="col-xl-6">
+                    <div class="link_box">
+                        <a href="/">Home</a>
+                        <a href="/specific">Specific Result</a>
+                        <a href="/">Overall Result</a>
+                        <a href="/wordcloud">Word Cloud</a>
+                        <a href="/submit">Query By LLM</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/css/jquery-3.4.1.min.js"></script>
+    <script src="../static/css/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="../static/css/custom.js"></script>
+</body>
+
+</html>
