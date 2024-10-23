@@ -57,4 +57,4 @@ def call_llama_api_stream(prompt):
         yield f"data: Error: {e}\n\n"
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.246', port=6612, debug=True)
+    app.run(host='192.168.0.246', port=6612, debug=False)
