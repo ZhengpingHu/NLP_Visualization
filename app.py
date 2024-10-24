@@ -13,6 +13,10 @@ def home():
 def submit_page():
     return render_template('submit.html')
 
+@app.route('/team')
+def team_page():
+    return render_template('team_intro.html')
+
 @app.route('/specific')
 def specific_page():
     plot_html = 'static/myplot.html'
@@ -57,4 +61,4 @@ def call_llama_api_stream(prompt):
         yield f"data: Error: {e}\n\n"
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.246', port=6612, debug=False)
+    app.run(host='192.168.0.246', port=6612, debug=True)
