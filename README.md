@@ -28,7 +28,7 @@ copy and paste the command into terminal:
 
 **pip install -r requirements.txt**
 
-3. for spaCy (the local English model):
+2. for spaCy (the local English model):
    
 copy and paste the command into terminal:
 
