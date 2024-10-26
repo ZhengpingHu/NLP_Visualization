@@ -54,11 +54,8 @@ def main():
     for file_name in comment_files:
         print(f"Processing {file_name}...")
         data = pd.read_csv(os.path.join(dataset_dir, file_name), usecols=["commentBody", "articleID"])
-
         processed_data = process_comments_in_parallel(data)
-
         all_data.append(processed_data)
-
     final_data = pd.concat(all_data, ignore_index=True)
     output_file = os.path.join(dataset_dir, "ProcessedCommentsAll.csv")
     final_data.to_csv(output_file, index=False)
