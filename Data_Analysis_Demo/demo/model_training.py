@@ -11,13 +11,9 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 
 data_file = "../dataset/ProcessedCommentsAll.csv"
-data = pd.read_csv(data_file)
-
 weight_threshold = 0.7
 num_partitions = 10
-num_workers = max(os.cpu_count() - 2, 8)
-
-data_splits = np.array_split(data, num_partitions)
+num_workers = min(os.cpu_count() - 2, 8)
 
 
 def process_batch(data_batch):
@@ -38,39 +34,46 @@ def process_batch(data_batch):
 
     return local_cooccurrence_dict, local_node_features
 
-global_cooccurrence_dict = defaultdict(lambda: {"neg": 0, "neu": 0, "pos": 0})
-global_node_features = defaultdict(lambda: np.zeros(3))
 
-with ProcessPoolExecutor(max_workers=num_workers) as executor:
-    futures = [executor.submit(process_batch, batch) for batch in data_splits]
-    for future in tqdm(as_completed(futures), total=num_partitions, desc="Processing Batches"):
-        local_cooccurrence_dict, local_node_features = future.result()
+def main():
+    data = pd.read_csv(data_file)
+    data_splits = np.array_split(data, num_partitions)
 
-        for (word1, word2), sentiment_weights in local_cooccurrence_dict.items():
-            global_cooccurrence_dict[(word1, word2)]["neg"] += sentiment_weights["neg"]
-            global_cooccurrence_dict[(word1, word2)]["neu"] += sentiment_weights["neu"]
-            global_cooccurrence_dict[(word1, word2)]["pos"] += sentiment_weights["pos"]
+    global_cooccurrence_dict = defaultdict(lambda: {"neg": 0, "neu": 0, "pos": 0})
+    global_node_features = defaultdict(lambda: np.zeros(3))
 
-        for word, features in local_node_features.items():
-            global_node_features[word] += features
+    with ProcessPoolExecutor(max_workers=num_workers) as executor:
+        futures = [executor.submit(process_batch, batch) for batch in data_splits]
+        for future in tqdm(as_completed(futures), total=num_partitions, desc="Processing Batches"):
+            local_cooccurrence_dict, local_node_features = future.result()
 
-G = nx.Graph()
-for (word1, word2), sentiment_weights in global_cooccurrence_dict.items():
-    total_weight = sentiment_weights["neg"] + sentiment_weights["neu"] + sentiment_weights["pos"]
-    if total_weight >= weight_threshold:
-        G.add_edge(word1, word2, weight=total_weight)
+            for (word1, word2), sentiment_weights in local_cooccurrence_dict.items():
+                global_cooccurrence_dict[(word1, word2)]["neg"] += sentiment_weights["neg"]
+                global_cooccurrence_dict[(word1, word2)]["neu"] += sentiment_weights["neu"]
+                global_cooccurrence_dict[(word1, word2)]["pos"] += sentiment_weights["pos"]
 
-for word, features in global_node_features.items():
-    if word in G and G.degree[word] > 1:
-        G.nodes[word]["features"] = features
+            for word, features in local_node_features.items():
+                global_node_features[word] += features
 
-adj_matrix = nx.to_scipy_sparse_matrix(G, weight="weight", format="csr")
+    G = nx.Graph()
+    for (word1, word2), sentiment_weights in global_cooccurrence_dict.items():
+        total_weight = sentiment_weights["neg"] + sentiment_weights["neu"] + sentiment_weights["pos"]
+        if total_weight >= weight_threshold:
+            G.add_edge(word1, word2, weight=total_weight)
 
-model_dir = "../models/"
-os.makedirs(model_dir, exist_ok=True)
-model_path = os.path.join(model_dir, "sentiment_cooccurrence_graph_compressed.pkl.gz")
+    for word, features in global_node_features.items():
+        if word in G and G.degree[word] > 1:
+            G.nodes[word]["features"] = features
 
-with gzip.open(model_path, "wb") as f:
-    joblib.dump((G, adj_matrix), f)
+    adj_matrix = nx.to_scipy_sparse_matrix(G, weight="weight", format="csr")
+    model_dir = "../models/"
+    os.makedirs(model_dir, exist_ok=True)
+    model_path = os.path.join(model_dir, "sentiment_cooccurrence_graph_compressed.pkl.gz")
 
-print(f"Compressed model saved to {model_path}")
+    with gzip.open(model_path, "wb") as f:
+        joblib.dump((G, adj_matrix), f)
+
+    print(f"Compressed model saved to {model_path}")
+
+if __name__ == "__main__":
+    main()
