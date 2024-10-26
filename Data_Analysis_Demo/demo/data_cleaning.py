@@ -23,7 +23,8 @@ def extract_meaningful_words(text):
     return " ".join([token.text for token in doc if token.pos_ in allowed_pos_tags])
 
 def process_comment(comment):
-    cleaned_text = clean_text(comment['commentBody'])
+    comment_body = comment['commentBody'] if pd.notna(comment['commentBody']) else ""
+    cleaned_text = clean_text(comment_body)
     neg, neu, pos = sentiment_scores(cleaned_text)
     keywords = extract_meaningful_words(cleaned_text)
     return comment['articleID'], cleaned_text, neg, neu, pos, keywords
@@ -39,7 +40,6 @@ def process_comments_in_parallel(data, num_processes=None):
     processed_data = pd.DataFrame(results,
                                   columns=["articleID", "cleaned_commentBody", "neg", "neu", "pos", "keywords"])
     return processed_data
-
 
 def main():
     dataset_dir = "../dataset/"
@@ -60,7 +60,6 @@ def main():
     output_file = os.path.join(dataset_dir, "ProcessedCommentsAll.csv")
     final_data.to_csv(output_file, index=False)
     print(f"All data processed and saved to {output_file}")
-
 
 if __name__ == "__main__":
     main()
