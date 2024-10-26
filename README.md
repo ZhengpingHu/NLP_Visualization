@@ -8,7 +8,14 @@ https://www.kaggle.com/datasets/aashita/nyt-comments
 
 Tips:
 
-This project already set the git to ignore for easier setup, so please download the dataset and put the dataset into the folder: dataset.
+Create three new folders under the Data_Analysis_Demo folder:
+
+**dataset** (Put all the decompressed databases in this folder)
+
+**models** (The trained models will be stored here)
+
+**temp** (The temporary files during training will be stored here)
+
 
 backend.py requires llama 3.2 model, installation process at: 
 
