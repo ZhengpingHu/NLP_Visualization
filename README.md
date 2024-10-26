@@ -40,3 +40,62 @@ copy and paste the command into terminal:
 copy and paste the command into terminal:
 
 **python -m spacy download en_core_web_sm** 
+
+Project Structure:
+
+NLP_Visualization
+|   .DS_Store
+|   .gitignore
+|   README.md
+|   requirements.txt
+|
++---Data_Analysis_Demo
+|   +---dataset
+|   +---demo
+|   |       data_cleaning.py
+|   |       model_output.py
+|   |       model_training.py
+|   |
+|   +---models
+|   +---old_testing_files
+|   |       dataset_cleaning.py
+|   |       GNN_test.py
+|   |       Inference_model.py
+|   |       mini_set_cleaning.py
+|   |       naive_bayes_training.py
+|   |       pre_cleaning.py
+|   |       single_article_visualization.py
+|   |       step1_data_cleaning.py
+|   |
+|   \---temp
++---Project_Proposal
+|   |   Project.pdf
+|   |
+|   \---Recordings
+|           record 1.m4a
+|
+\---Website_Demo
+    |   backend.py
+    |   LLM_query_test.py
+    |
+    +---static
+    |   |   about.html
+    |   |   contact.html
+    |   |   myplot.html
+    |   |   myplot.png
+    |   |   portfolio.html
+    |   |   team.html
+    |   |
+    |   +---css
+    |   |
+    |   +---fonts
+    |   |
+    |   \---images
+    |
+    \---templates
+            index.html
+            result.html
+            specific.html
+            submit.html
+            team_intro.html
+            wordcloud.html
