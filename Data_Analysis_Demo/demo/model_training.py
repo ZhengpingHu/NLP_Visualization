@@ -19,8 +19,6 @@ temp_dir = "../temp/"
 os.makedirs(temp_dir, exist_ok=True)
 
 
-
-# 定义默认情感字典函数
 def default_sentiment_dict():
     return {"neg": 0, "neu": 0, "pos": 0}
 
