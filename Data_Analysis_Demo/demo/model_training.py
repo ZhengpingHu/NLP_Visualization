@@ -13,7 +13,7 @@ from tqdm import tqdm
 data_file = "../dataset/ProcessedCommentsAll.csv"
 weight_threshold = 0.7
 num_partitions = 10
-num_workers = min(os.cpu_count() - 2, 8)
+num_workers = max(os.cpu_count() - 2, 8)
 
 
 def process_batch(data_batch):
