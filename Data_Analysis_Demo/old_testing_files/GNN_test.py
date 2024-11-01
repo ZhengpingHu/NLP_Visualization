@@ -16,10 +16,8 @@ from torch_geometric.nn import GCNConv
 from torch_geometric.utils import from_networkx
 from gensim.models import Word2Vec
 
-# 1. 数据预处理
-
 comments_file = "../dataset/CommentsJan2017.csv"
-data = pd.read_csv(comments_file, usecols=["commentBody", "articleID"]).head(2000)  # 您可以调整读取的数据量
+data = pd.read_csv(comments_file, usecols=["commentBody", "articleID"]).head(2000)
 
 def clean_text(text):
     text = re.sub(r'<.*?>', '', text)
@@ -27,7 +25,6 @@ def clean_text(text):
 
 data["cleaned_commentBody"] = data["commentBody"].apply(clean_text)
 
-# 情感分析
 analyzer = SentimentIntensityAnalyzer()
 
 def sentiment_scores(text):
@@ -37,7 +34,6 @@ def sentiment_scores(text):
 tqdm.pandas(desc="Sentiment Analysis")
 data[["neg", "neu", "pos"]] = data["cleaned_commentBody"].progress_apply(lambda x: pd.Series(sentiment_scores(x)))
 
-# 关键词提取
 nlp = spacy.load("en_core_web_sm")
 
 def extract_meaningful_words(text):
@@ -49,8 +45,6 @@ tqdm.pandas(desc="Extracting Keywords")
 data["keywords"] = data["cleaned_commentBody"].progress_apply(extract_meaningful_words)
 
 print(data[["commentBody", "cleaned_commentBody", "neg", "neu", "pos", "keywords"]].head())
-
-# 2. 构建共现图
 
 G = nx.Graph()
 
@@ -70,27 +64,17 @@ for (word1, word2), sentiment_weights in cooccurrence_dict.items():
     total_weight = sentiment_weights["neg"] + sentiment_weights["neu"] + sentiment_weights["pos"]
     G.add_edge(word1, word2, weight=total_weight)
 
-# 3. 准备节点特征和标签
-
-# (a) 生成节点特征（词向量）
-
-# 获取所有关键词的集合
 all_keywords = set()
 for keywords in data["keywords"]:
     all_keywords.update(keywords.split())
 
-# 训练Word2Vec模型
 sentences = [keywords.split() for keywords in data["keywords"]]
 word2vec_model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
 
-# 为每个节点生成词向量特征
 node_features = {}
 for word in all_keywords:
     node_features[word] = word2vec_model.wv[word]
 
-# (b) 为每个节点生成情感标签
-
-# 计算每个词的累积情感得分
 node_sentiments = defaultdict(lambda: np.zeros(3))
 for _, row in data.iterrows():
     keywords = row["keywords"].split()
@@ -99,7 +83,6 @@ for _, row in data.iterrows():
     for word in keywords:
         node_sentiments[word] += np.array([neg, neu, pos])
 
-# 对情感得分进行归一化
 for word in node_sentiments:
     total = node_sentiments[word].sum()
     if total > 0:
@@ -107,21 +90,14 @@ for word in node_sentiments:
     else:
         node_sentiments[word] = np.array([0, 0, 0])
 
-# 4. 准备图数据用于GNN
-
-# 将节点特征和标签添加到图中
 for node in G.nodes():
-    G.nodes[node]['x'] = node_features.get(node, np.zeros(100))  # 如果没有特征，使用零向量
-    G.nodes[node]['y'] = node_sentiments.get(node, np.zeros(3))  # 如果没有情感得分，使用零向量
+    G.nodes[node]['x'] = node_features.get(node, np.zeros(100))
+    G.nodes[node]['y'] = node_sentiments.get(node, np.zeros(3))
 
-# 将 NetworkX 图转换为 PyTorch Geometric 的数据对象
 data_pg = from_networkx(G)
 
-# 转换节点特征和标签为 tensor，先将列表转换为 numpy.ndarray
 data_pg.x = torch.tensor(np.array([G.nodes[node]['x'] for node in G.nodes()]), dtype=torch.float)
 data_pg.y = torch.tensor(np.array([G.nodes[node]['y'] for node in G.nodes()]), dtype=torch.float)
-
-# 5. 定义GNN模型
 
 class GNNModel(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
@@ -139,11 +115,10 @@ class GNNModel(nn.Module):
 
         return x
 
-# 6. 训练模型
 
 input_dim = data_pg.num_node_features
 hidden_dim = 64
-output_dim = 3  # 情感得分维度
+output_dim = 3
 
 model = GNNModel(input_dim, hidden_dim, output_dim)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
@@ -159,9 +134,6 @@ for epoch in range(100):
     if (epoch+1) % 10 == 0:
         print(f"Epoch {epoch+1}, Loss: {loss.item():.4f}")
 
-# 7. prediction and output
-
-# create the word to ordering
 word_to_index = {word: idx for idx, word in enumerate(G.nodes())}
 index_to_word = {idx: word for word, idx in word_to_index.items()}
 
@@ -205,7 +177,7 @@ def find_related_words(model, data_pg, input_words, sentiment_direction, top_n=1
 # Example
 
 input_keywords = ["trump"]  # Modify
-sentiment_direction = "pos"  # 可选择 "neg", "neu", "pos"
+sentiment_direction = "pos"  # "neg", "neu", "pos"
 
 related_words = find_related_words(model, data_pg, input_keywords, sentiment_direction, top_n=10)
 print(f"Related words for {input_keywords} in {sentiment_direction} sentiment are: {related_words}")
