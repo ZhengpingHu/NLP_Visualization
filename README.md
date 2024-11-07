@@ -23,7 +23,7 @@ You can download free templates for the web interface from [HTML Design](https:/
    pip install -r requirements.txt
 2. Download the spaCy English model:
    ```bash
-    python -m spacy download en_core_web_sm
+   python -m spacy download en_core_web_sm
 
 ## Project Structure
 NLP_Visualization
@@ -32,6 +32,7 @@ NLP_Visualization
     .gitignore  
     README.md  
     requirements.txt
+    
     Data_Analysis_Demo/  
         dataset/  
         demo/  
@@ -82,3 +83,5 @@ Add your datasets in Data_Analysis_Demo/dataset/.
 Run backend.py to start the server.
 
 Open index.html in a browser to access the visualization dashboard.
+
+Default accessing location for the Demo website:[Here](https://192.168.0.246:6612).
