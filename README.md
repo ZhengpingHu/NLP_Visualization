@@ -80,7 +80,7 @@ NLP_Visualization
 ## Usage
 Add your datasets in `Data_Analysis_Demo/dataset/`.
 
-Run backend.py to start the server.
+Run `backend.py` to start the server.
 
 Open `index.html` in a browser to access the visualization dashboard.
 
