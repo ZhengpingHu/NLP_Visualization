@@ -78,7 +78,7 @@ NLP_Visualization
             wordcloud.html
 
 ## Usage
-Add your datasets in Data_Analysis_Demo/dataset/.
+Add your datasets in `Data_Analysis_Demo/dataset/`.
 
 Run backend.py to start the server.
 
