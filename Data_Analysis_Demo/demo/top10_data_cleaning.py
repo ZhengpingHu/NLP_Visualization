@@ -11,7 +11,7 @@ def count_words(text):
 articles_files = sorted(glob("../dataset/Articles*.csv"))
 comments_files = sorted(glob("../dataset/Comments*.csv"))
 
-articles_columns = ['articleID', 'keywords', 'headline', 'articleWordCount']
+articles_columns = ['articleID', 'headline', 'articleWordCount']
 comments_columns = ['articleID', 'commentBody']
 
 for articles_file in articles_files:
@@ -39,7 +39,7 @@ for articles_file in articles_files:
         filtered_comments = merged_df[merged_df['articleID'].isin(top_articles_ids)]
 
         # Reorder columns: article-related first, commentBody last
-        reordered_columns = ['articleID', 'keywords', 'headline', 'hlwordcount',
+        reordered_columns = ['articleID', 'headline', 'hlwordcount',
                              'articleWordCount', 'commentCount', 'commentBody']
         filtered_comments = filtered_comments[reordered_columns]
 
