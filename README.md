@@ -87,3 +87,5 @@ Open `index.html` in a browser to access the visualization dashboard.
 Default accessing location for the Demo website: [Here](https://192.168.0.246:6612). (Please click after you run the backend.py, the location is: 192.168.0.246:6612)
 
 Modify the default access location at `backend.py`.
+
+Please use `celery -A backend.celery worker --loglevel=info --concurrency=1` at the root folder to open the celery service.
