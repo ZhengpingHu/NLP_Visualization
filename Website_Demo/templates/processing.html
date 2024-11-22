@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- 原有的头部内容 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing</title>
+    <!-- 引入 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container" style="text-align: center; padding-top: 50px;">
+        <h3>Your request is being processed. Please wait...</h3>
+        <p id="status">Status: Pending...</p>
+    </div>
+
+    <script>
+        var taskId = "{{ task_id }}";
+
+        function checkStatus() {
+            fetch("/celery-status/" + taskId)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("status").innerText = "Status: " + data.state;
+                    if (data.state === "SUCCESS") {
+                        // 任务完成，重定向到结果页面
+                        window.location.href = "/task-result/" + taskId;
+                    } else if (data.state === "FAILURE") {
+                        document.getElementById("status").innerText = "An error occurred during processing.";
+                    } else {
+                        // 继续轮询
+                        setTimeout(checkStatus, 5000);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    setTimeout(checkStatus, 5000);
+                });
+        }
+
+        // 开始轮询
+        setTimeout(checkStatus, 2000);
+    </script>
+
+    <!-- 引入外部脚本 -->
+    <script src="{{ url_for('static', filename='css/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='css/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='css/custom.js') }}"></script>
+</body>
+
+</html>

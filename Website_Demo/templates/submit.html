@@ -9,9 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>GNN Model + LLM Query</title>
-
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
     <!-- fonts awesome style -->
     <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
     <!-- fonts style -->
@@ -24,88 +23,33 @@
 
 <body>
     <div class="hero_area">
-        <!-- header section starts -->
-        <header class="header_section">
-            <nav class="navbar navbar-expand-lg custom_nav-container">
-                <div class="custom_menu-btn">
-                    <button onclick="openNav()">
-                        <span class="s-1"> </span>
-                        <span class="s-2"> </span>
-                        <span class="s-3"> </span>
-                        <span class="s-4"> </span>
-                    </button>
-                </div>
-                <div id="myNav" class="overlay">
-                    <div class="menu_btn-style">
-                        <button onclick="closeNav()">
-                            <span class="s-1"> </span>
-                            <span class="s-2"> </span>
-                            <span class="s-3"> </span>
-                            <span class="s-4"> </span>
-                        </button>
-                    </div>
-                    <div class="overlay-content">
-                        <a class="active" href="/">Home</a>
-                        <a href="/team">About Us</a>
-                        <a href="/">Overall Analysis</a>
-                        <a href="/specific">Specific Analysis</a>
-                        <a href="/wordcloud">WordCloud</a>
-                        <a href="/submit">Query</a>
-                    </div>
-                </div>
-                <a class="navbar-brand" href="index.html">
-                    <span>GNN Model + LLM Query</span>
-                </a>
-            </nav>
-        </header>
-        <!-- end header section -->
-        
-        <!-- main section for Llama Poem Query -->
+        <!-- 导航栏部分，与原始代码相同 -->
+        <!-- main section for Query -->
         <section class="llama_poem_query_section" style="padding: 50px 0; text-align: center;">
             <form action="/submit-query" method="POST" style="max-width: 600px; margin: 0 auto;">
+                {% if error %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endif %}
                 <label for="keyword">Enter a keyword:</label><br>
                 <input type="text" id="keyword" name="keyword" placeholder="Enter a keyword..." style="width: 100%;"><br><br>
-            
+
                 <label for="sentiment">Select a sentiment:</label><br>
                 <select id="sentiment" name="sentiment" style="width: 100%;">
                     <option value="positive">Positive</option>
                     <option value="negative">Negative</option>
                     <option value="neutral">Neutral</option>
                 </select><br><br>
-            
+
                 <input type="submit" value="Submit Query" class="btn btn-primary">
             </form>
         </section>
-        <!-- end Llama Poem Query section -->
+        <!-- end Query section -->
     </div>
 
-    <!-- footer section -->
-    <footer class="footer_section">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6">
-                    <p>&copy; <span id="displayYear"></span> All Rights Reserved. Design by <a href="https://html.design/">Free Html Templates</a></p>
-                </div>
-                <div class="col-xl-6">
-                    <div class="link_box">
-                        <a href="/">Home</a>
-                        <a href="/team">About Us</a>
-                        <a href="/specific">Specific Result</a>
-                        <a href="/">Overall Result</a>
-                        <a href="/wordcloud">Word Cloud</a>
-                        <a href="/submit">Query By LLM</a> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer section -->
-
-    <script src="../static/css/jquery-3.4.1.min.js"></script>
-    <script src="../static/css/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="../static/css/custom.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+    <!-- 引入外部脚本 -->
+    <script src="{{ url_for('static', filename='css/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='css/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='css/custom.js') }}"></script>
 </body>
 
 </html>
