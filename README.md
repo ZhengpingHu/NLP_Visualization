@@ -86,9 +86,7 @@ NLP_Visualization
    ```bash
    python3 start.py
 
-4. Open `index.html` in a browser to access the visualization dashboard.
-
-5. Default accessing location for the Demo website: [Here](https://192.168.0.246:6612) in `backend.py`. (Please click after you run the backend.py, the location is: 192.168.0.246:6612)
+4. Default accessing location for the Demo website: [Here](https://192.168.0.246:6612) in `Website_Demo/backend.py`. (Please click after you run the backend.py, the location is: 192.168.0.246:6612)
 
 
 
