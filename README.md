@@ -88,7 +88,15 @@ Default accessing location for the Demo website: [Here](https://192.168.0.246:66
 
 Modify the default access location at `backend.py`.
 
+For an easier way to run the entire project:
+```bash
+python3 start.py
+
+
 Please use the following command at the root folder to open the celery service.
 ```bash
 celery -A backend.celery worker --loglevel=info --concurrency=1 
+
+
+
 
