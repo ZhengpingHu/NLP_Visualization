@@ -94,7 +94,7 @@ NLP_Visualization
    ```bash
    python3 start.py
 
-4. Default accessing location for the Demo website: [Here](https://192.168.0.246:6612) in `Website_Demo/backend.py`. (Please click after you run the start.py, the location is: 192.168.0.246:6612)
+4. Default accessing location for the Demo website: [Here](https://192.168.0.246:6612) in `Website_Demo/backend.py`. (Modify [Here](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L341))
 
 
 
