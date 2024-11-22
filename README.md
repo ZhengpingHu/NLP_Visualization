@@ -23,6 +23,14 @@ You can download free templates for the web interface from [HTML Design](https:/
 2. Download the spaCy English model:
    ```bash
    python -m spacy download en_core_web_sm
+3. Install the Redis server (for Ubuntu)
+   ```bash
+   sudo apt-get update
+   sudo apt-get install redis-server
+4. Run the Redis server
+   ```bash
+   sudo service redis-server start
+5. Make sure you install the Celery server
 
 ## Project Structure
 NLP_Visualization
