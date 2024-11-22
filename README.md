@@ -9,7 +9,6 @@ Create the following folders under the `Data_Analysis_Demo` folder:
 
 - **`dataset`**: Place all decompressed datasets here.
 - **`models`**: Trained models will be saved in this folder.
-- **`temp`**: Temporary files generated during training will be stored here.
 
 ## Backend Requirements
 `backend.py` requires the llama 3.2 model. Follow the installation instructions provided [here](https://ollama.com/library/llama3.2).
