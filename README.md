@@ -90,4 +90,5 @@ Modify the default access location at `backend.py`.
 
 Please use 
 ```bash
-`celery -A backend.celery worker --loglevel=info --concurrency=1` at the root folder to open the celery service.
+`celery -A backend.celery worker --loglevel=info --concurrency=1` 
+at the root folder to open the celery service.
