@@ -78,24 +78,21 @@ NLP_Visualization
             wordcloud.html
 
 ## Usage
-Add your datasets in `Data_Analysis_Demo/dataset/`.
+1. Add your datasets in `Data_Analysis_Demo/dataset/`.
 
-Run `backend.py` to start the server.
+2. Add your models in `Data_Analysis_Demo/models/`.
 
-Open `index.html` in a browser to access the visualization dashboard.
+3. Run `start.py` to start the server.
+   ```bash
+   python -m spacy download en_core_web_sm
 
-Default accessing location for the Demo website: [Here](https://192.168.0.246:6612). (Please click after you run the backend.py, the location is: 192.168.0.246:6612)
+4. Open `index.html` in a browser to access the visualization dashboard.
 
-Modify the default access location at `backend.py`.
-
-For an easier way to run the entire project:
-```bash
-python3 start.py
+5. Default accessing location for the Demo website: [Here](https://192.168.0.246:6612) in `backend.py`. (Please click after you run the backend.py, the location is: 192.168.0.246:6612)
 
 
-Please use the following command at the root folder to open the celery service.
-```bash
-celery -A backend.celery worker --loglevel=info --concurrency=1 
+
+
 
 
 
