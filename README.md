@@ -84,7 +84,7 @@ NLP_Visualization
 
 3. Run `start.py` to start the server.
    ```bash
-   python -m spacy download en_core_web_sm
+   python3 start.py
 
 4. Open `index.html` in a browser to access the visualization dashboard.
 
