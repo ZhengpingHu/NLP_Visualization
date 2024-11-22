@@ -31,6 +31,7 @@ You can download free templates for the web interface from [HTML Design](https:/
    ```bash
    sudo service redis-server start
 5. Make sure you install the Celery server
+6. Modify the [absolute address](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L57-L66) before you start the project.
 
 ## Project Structure
 NLP_Visualization
