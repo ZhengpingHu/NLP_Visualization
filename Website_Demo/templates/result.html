@@ -24,20 +24,15 @@
     <script type="text/javascript">
         var graphJSON = {{ graphJSON|tojson }};
         Plotly.newPlot('graph-div', graphJSON.data, graphJSON.layout);
-
         var prompt = {{ prompt|tojson }};
         var encodedPrompt = encodeURIComponent(prompt);
-
         var source = new EventSource('/stream?prompt=' + encodedPrompt);
-
         var responseDiv = document.getElementById('response');
         var llmResponseMarkdown = '\n';
-
         source.onmessage = function(event) {
             llmResponseMarkdown += event.data;
             responseDiv.innerHTML = marked.parse(llmResponseMarkdown);
         };
-
         source.onerror = function(event) {
             console.error("EventSource failed:", event);
             source.close();
