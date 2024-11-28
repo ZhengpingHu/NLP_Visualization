@@ -4,6 +4,9 @@ Course Project for CSCI6612 Data Visualization
 ## Dataset
 Data source: [New York Times Comments dataset](https://www.kaggle.com/datasets/aashita/nyt-comments) (from Kaggle)
 
+## OS requirement
+[Ubuntu 22.04](https://releases.ubuntu.com/jammy/)
+
 ## Directory Setup
 Create the following folders under the `Data_Analysis_Demo` folder:
 
@@ -31,7 +34,13 @@ You can download free templates for the web interface from [HTML Design](https:/
    ```bash
    sudo service redis-server start
 5. Make sure you install the Celery server
-6. Modify the [absolute address](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L57-L66) before you start the project.
+   ```bash
+   pip install "celery[redis]"
+6. Verify Redis and Celery setup:
+    ```bash
+    celery -A backend worker --loglevel=info
+7. Modify the [absolute address](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L57-L66) before you start the project.
+
 
 ## Project Structure
 NLP_Visualization
@@ -96,6 +105,47 @@ NLP_Visualization
 
 4. Default accessing location for the Demo website: [Here](http://192.168.0.246:6612) in `Website_Demo/backend.py`. (Modify [Here](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L341))
 
+## References
+This project relies on the following key libraries and tools:
+
+1. **[Pandas](https://pandas.pydata.org/)**  
+   A powerful Python library for data manipulation and analysis. Used extensively for handling and cleaning the dataset, as well as merging and filtering features.
+
+2. **[NumPy](https://numpy.org/)**  
+   A fundamental package for numerical computations in Python. Utilized for handling large arrays and performing mathematical operations.
+
+3. **[spaCy](https://spacy.io/)**  
+   An advanced Natural Language Processing library. Applied for part-of-speech tagging during the TF-IDF keyword extraction process.
+
+4. **[VADER](https://github.com/cjhutto/vaderSentiment)**  
+   A lexicon and rule-based sentiment analysis tool. Used for assigning sentiment scores (positive, negative, neutral) to user comments.
+
+5. **[Matplotlib](https://matplotlib.org/)**  
+   A comprehensive library for creating static visualizations. Used to generate sentiment distribution graphs and other visualizations.
+
+6. **[WordCloud](https://github.com/amueller/word_cloud)**  
+   A Python library for generating word clouds. Used to visualize keyword distributions across sentiment categories.
+
+7. **[Flask](https://flask.palletsprojects.com/)**  
+   A lightweight web framework for building the project’s backend and serving the visualization results.
+
+8. **[Dash](https://plotly.com/dash/)**  
+   A framework for building analytical web applications. Utilized to create dashboards for interactive data exploration.
+
+9. **[PyTorch](https://pytorch.org/)**  
+   A deep learning framework used to build and train the Graph Neural Network (GNN) for sentiment-driven keyword relationships.
+
+10. **[Torch Geometric](https://pytorch-geometric.readthedocs.io/)**  
+    An extension library for PyTorch. Used to implement and train the GNN for graph-based modeling.
+
+11. **[Redis](https://redis.io/)**  
+    An in-memory data structure store used as a message broker to manage intermediate data and task queues.
+
+12. **[Celery](https://docs.celeryproject.org/)**  
+    A distributed task queue. Used for scheduling and managing long-running computational tasks asynchronously.
+
+13. **[OpenAI](https://chatgpt.com/)** 
+    Much help in understanding concepts was by chatGPT, but no direct code was copied from chatGPT.
 
 
 
