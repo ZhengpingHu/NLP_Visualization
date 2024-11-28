@@ -144,7 +144,7 @@ This project relies on the following key libraries and tools:
 12. **[Celery](https://docs.celeryproject.org/)**  
     A distributed task queue. Used for scheduling and managing long-running computational tasks asynchronously.
 
-13. **[OpenAI](https://chatgpt.com/)** 
+13. **[OpenAI](https://chatgpt.com/)**
     Much help in understanding concepts was by chatGPT, but no direct code was copied from chatGPT.
 
 
