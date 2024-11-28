@@ -1,109 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>CSCI 6612 NLP Visualization</title>
-
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/bootstrap.css') }}"
+    />
     <!-- fonts awesome style -->
     <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
     <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Custom styles for this template -->
     <link href="../static/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="../static/css/responsive.css" rel="stylesheet" />
-</head>
+  </head>
 
-<body>
+  <body class="sub_page">
     <div class="hero_area">
-        <!-- header section starts -->
-        <header class="header_section">
-            <nav class="navbar navbar-expand-lg custom_nav-container">
-                <div class="custom_menu-btn">
-                    <button onclick="openNav()">
-                        <span class="s-1"> </span>
-                        <span class="s-2"> </span>
-                        <span class="s-3"> </span>
-                        <span class="s-4"> </span>
-                    </button>
-                </div>
-                <div id="myNav" class="overlay">
-                    <div class="menu_btn-style">
-                        <button onclick="closeNav()">
-                            <span class="s-1"> </span>
-                            <span class="s-2"> </span>
-                            <span class="s-3"> </span>
-                            <span class="s-4"> </span>
-                        </button>
-                    </div>
-                    <div class="overlay-content">
-                        <a class="active" href="/">Home</a>
-                        <a href="/team">About Us</a>
-                        <a href="/">Overall Analysis</a>
-                        <a href="/specific">Specific Analysis</a>
-                        <a href="/wordcloud">WordCloud</a>
-                        <a href="/submit">Query</a>
-                    </div>
-                </div>
-                <a class="navbar-brand" href="/">
-                    <span>Demo</span>
-                </a>
-            </nav>
-        </header>
-        
-    </div>
-
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <br>
-                <br>
-                <br>
-                <br>
-                <h2>Welcome to the NLP Visualization Demo</h2>
-                <p>
-                    This demo is created to show the NLP visualization results of the database. Some functions are not completed. Clicking them will return to the homepage.
-                </p>
-                <p>
-                    The demo will mainly include four parts: overall visualization of the selectable range, interactive visualization focusing on a certain article, word cloud, and AI part. 
-                </p>
-                <p>    
-                    The AI ​​part will include two important contents: using the new data added in the previous data cleaning phase to complete the training of the Naive Bayes model, and input keywords into the Naive Bayes model. The Naive Bayes model will give the phrases with the highest relevance according to the user's selection. LLM will receive these phrases and finally give a writing outline with guidance (this part is not completed, but it is already possible to communicate with LLM through HTML).
-                </p>
+      <!-- header section starts -->
+      <header class="header_section">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <div class="custom_menu-btn">
+            <button onclick="openNav()">
+              <span class="s-1"> </span>
+              <span class="s-2"> </span>
+              <span class="s-3"> </span>
+              <span class="s-4"> </span>
+            </button>
+          </div>
+          <div id="myNav" class="overlay">
+            <div class="menu_btn-style">
+              <button onclick="closeNav()">
+                <span class="s-1"> </span>
+                <span class="s-2"> </span>
+                <span class="s-3"> </span>
+                <span class="s-4"> </span>
+              </button>
             </div>
-        </div>
+            <div class="overlay-content">
+              <a class="active" href="/">Home</a>
+              <a href="/explor">Exploratory Analytics</a>
+              <a href="/visual">Visual Analytics</a>
+              <a href="/conch">Conclusion</a>
+              <a href="/submit">GNN+LLM Query</a>
+            </div>
+          </div>
+          <a class="navbar-brand" href="/">
+            <span>NLP Visualization</span>
+          </a>
+        </nav>
+      </header>
     </div>
-</body>
 
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>Welcome</h2>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <!-- <h2>Welcome to the NLP Visualization Demo</h2> -->
+          <p>
+            This project centers around the integration of machine learning and
+            visual analytics to explore the emotional connection between New
+            York Times articles and their corresponding reader comments.
+          </p>
+          <p>
+            This project aims to analyze and visualize the emotional aspects of
+            comments, providing valuable insights to media outlets, enabling
+            them to better understand reader preferences and improve content
+            quality and business value.
+          </p>
+          <p>
+            By analyzing comment sentiment, outlets can better understand reader
+            preferences for different themes and styles of content, allowing for
+            more informed decision-making in editorial planning and content
+            strategy.
+          </p>
+
+          <p>Author: Zhengping Hu B00838149 | Ye Wang B00972707</p>
+        </div>
+      </div>
+    </div>
+    <!-- </section> -->
+    <!-- </body> -->
 
     <!-- footer section -->
     <footer class="footer_section">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6">
-                    <p>&copy; <span id="displayYear"></span> All Rights Reserved. Design by <a href="https://html.design/">Free Html Templates</a></p>
-                </div>
-                <div class="col-xl-6">
-                    <div class="link_box">
-                        <a href="/">Home</a>
-                        <a href="/team">About Us</a>
-                        <a href="/specific">Specific Result</a>
-                        <a href="/">Overall Result</a>
-                        <a href="/wordcloud">Word Cloud</a>
-                        <a href="/submit">Query By LLM</a> 
-                    </div>
-                </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-6">
+            <p>
+              &copy; <span id="displayYear"></span> All Rights Reserved. Design
+              by <a href="https://html.design/">Free Html Templates</a>
+            </p>
+          </div>
+          <div class="col-xl-6">
+            <div class="link_box">
+              <a href="/">Home</a>
+              <a href="/explor">Exploratory Analytics</a>
+              <a href="/visual">Visual Analytics</a>
+              <a href="/conc">Conclusion</a>
+              <a href="/submit">GNN+LLM Query</a>
             </div>
+          </div>
         </div>
+      </div>
     </footer>
     <!-- footer section -->
 
@@ -112,6 +125,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="../static/css/custom.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-</body>
-
+  </body>
 </html>

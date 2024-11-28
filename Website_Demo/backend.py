@@ -197,19 +197,39 @@ def home():
 def submit_page():
     return render_template('submit.html')
 
-@app.route('/team')
-def team_page():
-    return render_template('team_intro.html')
+@app.route('/explor')
+def explor_page():
+    content = [
+        {'type': 'image', 'image': 'static/1.png', 'title': 'Exploratory analysis: 2d distribution among comment\'s different emotions', 'text': ' '},
+        {'type': 'plot', 'plot': 'static/2_3D_Sentiment_Score_Distribution.html', 'title': 'Exploratory analysis: 3D distribution among comment\'s different emotions', 'text': 'Overall, this graph shows that the overall sentiment tendency of comments is more moderate and dominated by neutral sentiment. This distribution may reflect commenters\' neutral or mild reactions to the content of the article, rather than extreme emotions.'},
+        {'type': 'image', 'image': 'static/3.png', 'title': 'Exploratory analysis: 2d distribution among comment\'s different emotions. In specific comments.', 'text': ' '},
+        {'type': 'plot', 'plot': 'static/4_3D_Sentiment_Score_Distribution.html', 'title': 'Exploratory analysis: 3d distribution among comment\'s different emotions. In specific comments.', 'text': 'Overall, this graph further confirms that the overall sentiment of the comments is skewed towards neutral and mildly positive sentiment, with only a small number of comments showing significant negative sentiment. This may reflect a high level of acceptance of the topic by the commenters, or that the topic discussed did not elicit a strong emotional response.'},
+        {'type': 'image', 'image': 'static/5.png', 'title': 'Word Cloud with Custom Color Gradient for Positive Sentiment', 'text': 'Positive Sentiment Word Cloud: Some common positive words such as “thank”, “great”, “good”, “love”, “excellent”, and “beautiful” can be seen in the Positive Sentiment Word Cloud, which express positive emotions of the readers.'},
+        {'type': 'image', 'image': 'static/6.png', 'title': 'Word Cloud with Custom Color Gradient for Negative Sentiment', 'text': 'Negative Sentiment Word Cloud: the negative sentiment word cloud on the other hand highlights words such as “trump”, “war”, “wrong”, “bad”, and “hate”, showing the negative sentiments of the readers.'},
+        {'type': 'image', 'image': 'static/7.png', 'title': 'Word Cloud with Custom Color Gradient for Neutral Sentiment', 'text': 'Neutral emotion word cloud: The neutral emotion word cloud mainly contains some descriptive or informative words, such as “people”, “have”, “more”, “just”, “know”, “country”, etc. These words are usually used to describe the facts or make neutral points.'}
+    ]
+    return render_template('explor.html', content=content)
 
-@app.route('/specific')
-def specific_page():
-    plot_html = 'static/myplot.html'
-    return render_template('specific.html', plot_html=plot_html)
 
-@app.route('/wordcloud')
-def worldcloud_page():
-    plot_png = 'static/myplot.png'
-    return render_template('wordcloud.html', plot_png=plot_png)
+
+@app.route('/visual')
+def visual_page():
+    items = [
+        {'image': 'static/8.jpg', 'title': 'Keyword word cloud of the year based on sentiment intensity', 'text': 'In 2017, keyword sentiment reflected political controversies like Trump and Russiagate, while in 2018, focus shifted towards social issues like gun violence, with political keywords becoming more neutral and analytical.'},
+        {'image': 'static/9.jpg', 'title': 'Annual Keyword Word Cloud Based on Number of Comments', 'text': 'In 2017, comments focused on political issues like Trump and policy controversies, while in 2018, the focus shifted to social issues like gun violence, with an increase in negatively charged discussions.'},
+        {'image': 'static/10.png', 'title': '2D Keyword Co-occurrence Network Analysis', 'text': 'The dense structure reveals interconnected discussions on themes like "election," "law," and "democracy," showing the public\'s holistic interest in fairness, transparency, and governance mechanisms.'}
+    ]
+    plots = [
+        'static/11_3D_Keyword_Cooccurrence_Network.html'
+    ]
+    return render_template('visual.html', items=items, plots=plots)
+
+
+
+
+@app.route('/conc')
+def conclusion_page():
+    return render_template('conclusion.html')
 
 @app.route('/submit-query', methods=['POST'])
 def submit_query():
@@ -338,4 +358,4 @@ def process_model_task(self, keyword, sentiment):
         raise e
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.246', port=6612, debug=False)
+    app.run(host='192.168.2.96', port=6612, debug=False)
