@@ -89,10 +89,15 @@ NLP_Visualization
         templates/  
             index.html  
             result.html  
-            specific.html  
+            specific.html              specific.html  
             submit.html  
             team_intro.html  
             wordcloud.html
+   Analytics/
+      NLP_Visualization_Comments_step1.ipynb
+      NLP_Visualization_Comments_step1.ipynb - Colab.pdf
+      NLP_Visualization_Comments_step2.ipynb
+      NLP_Visualization_Comments_step2.ipynb - Colab.pdf
 
 ## Usage
 1. Add your datasets in `Data_Analysis_Demo/dataset/`.
