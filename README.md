@@ -39,7 +39,7 @@ You can download free templates for the web interface from [HTML Design](https:/
 6. Verify Redis and Celery setup:
     ```bash
     celery -A backend worker --loglevel=info
-7. Modify the [absolute address](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L57-L66) before you start the project.
+7. Modify the [absolute address](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L59-L68) before you start the project.
 
 
 ## Project Structure
@@ -110,7 +110,7 @@ NLP_Visualization
    ```bash
    python3 start.py
 
-4. Default accessing location for the Demo website: [Here](http://192.168.0.246:6612) in `Website_Demo/backend.py`. (Modify [Here](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L361))
+4. Default accessing location for the Demo website: [Here](http://192.168.0.246:6612) in `Website_Demo/backend.py`. (Modify [Here](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L375))
 
 ## References
 This project relies on the following key libraries and tools:
