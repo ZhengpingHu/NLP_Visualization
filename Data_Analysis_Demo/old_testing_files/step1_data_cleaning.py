@@ -10,8 +10,8 @@ analyzer = SentimentIntensityAnalyzer()
 nlp = spacy.load("en_core_web_sm")
 
 def clean_text(text):
-    text = re.sub(r'<.*?>', '', text)  # 去除 HTML 标签
-    return re.sub(r'\s+', ' ', text).strip()  # 去除多余的空格
+    text = re.sub(r'<.*?>', '', text)
+    return re.sub(r'\s+', ' ', text).strip()
 
 def sentiment_scores(text):
     sentiment = analyzer.polarity_scores(text)
