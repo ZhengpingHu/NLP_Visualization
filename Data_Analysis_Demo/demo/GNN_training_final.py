@@ -15,7 +15,6 @@ from torch_geometric.nn import GCNConv
 from torch_geometric.utils import from_networkx
 from gensim.models import Word2Vec
 
-# 数据预处理
 comments_file = "../dataset/GNN_cleaned.csv"
 data = pd.read_csv(comments_file, usecols=["cleaned_commentBody", "articleID"]).head(2000)
 
