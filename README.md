@@ -1,10 +1,17 @@
 # NLP_Visualization
 Course Project for CSCI6612 Data Visualization
 
-# Author
+## Author
 Ye Wang
 
 Zhengping Hu
+
+## Project Proposal
+The purpose of this project is to use NLP technology to analyze NYT article comments within a specific time period, determine the user's emotions and the associated words they are interested in, and provide media practitioners with more in-depth analysis and clear visualization content.
+
+
+At the same time, we use the GNN model to analyze the relevance of various words in user comments, and finally combine the results with the local LLM to provide authors with keyword-based writing outlines, which can greatly improve the author's writing efficiency and increase the author's article effect in a targeted manner.
+
 
 ## Dataset
 Data source: [New York Times Comments dataset](https://www.kaggle.com/datasets/aashita/nyt-comments) (from Kaggle)
