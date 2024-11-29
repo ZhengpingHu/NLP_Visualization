@@ -78,7 +78,6 @@ NLP_Visualization
             pre_cleaning.py  
             single_article_visualization.py  
             step1_data_cleaning.py  
-        temp/  
 
     Project_Proposal/  
         Project.pdf  
