@@ -170,6 +170,7 @@
         {% for plot in plots %}
         <div class="plot-container">
             <iframe src="{{ url_for('static', filename=plot.split('static/')[-1]) }}"></iframe>
+            <br>
             <b class="description">3D Keyword Co-occurrence Network Visualization</b>
             <p class="analysis">The 3D network highlights "people" as the central keyword, reflecting the public's primary concern with policies affecting lives, with strong connections to "government," "country," and "president," underscoring interest in governance and national policies.</p>
         </div>
