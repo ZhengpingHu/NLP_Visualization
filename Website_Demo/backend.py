@@ -18,13 +18,15 @@ from markupsafe import Markup
 app = Flask(__name__)
 
 
-# detup Celery
+# Setup Celery
 app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'  # by using redis 
 app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
+
+# import the GNN model from GNN.py file. Its a simple reuse. Source code see Data_Analysis_Demo folder.
 class GNNModel(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
         super(GNNModel, self).__init__()
@@ -68,6 +70,8 @@ def load_gnn_model():
 
         gnn_model = model
 
+
+# also a reuse from GNN model, the function would get the word and snetiment direction from submit.html, send to GNN model.
 def find_related_words(model, data_pg, word_to_index, index_to_word, input_words, sentiment_direction, top_n=10):
     sentiment_idx = {"negative": 0, "neutral": 1, "positive": 2}
     idx = sentiment_idx.get(sentiment_direction.lower())
@@ -107,6 +111,8 @@ def find_related_words(model, data_pg, word_to_index, index_to_word, input_words
 
     return related_words
 
+
+# Get the graph from the GNN model, absolutely graph algorithm.
 def visualize_graph(related_words, input_keywords, sentiment_direction):
     # Combine the input word and related words
     sub_nodes = set(related_words + input_keywords)
@@ -154,6 +160,7 @@ def visualize_graph(related_words, input_keywords, sentiment_direction):
     node_y = []
     node_z = []
     text = []
+    
     for node in subgraph.nodes():
         x, y, z = pos[node]
         node_x.append(x)
@@ -189,14 +196,18 @@ def visualize_graph(related_words, input_keywords, sentiment_direction):
     graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graph_json
 
+# Route for index page.
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
+# Route for submit page.
 @app.route('/submit')
 def submit_page():
     return render_template('submit.html')
 
+# Route for explormentray page.
 @app.route('/explor')
 def explor_page():
     content = [
@@ -211,7 +222,7 @@ def explor_page():
     return render_template('explor.html', content=content)
 
 
-
+# Route for visual analysis page.
 @app.route('/visual')
 def visual_page():
     items = [
@@ -224,13 +235,12 @@ def visual_page():
     ]
     return render_template('visual.html', items=items, plots=plots)
 
-
-
-
+# Route for conclusion page.
 @app.route('/conc')
 def conclusion_page():
     return render_template('conclusion.html')
 
+# Route for submit-query, the middle page for submit.html.
 @app.route('/submit-query', methods=['POST'])
 def submit_query():
     keyword = request.form.get('keyword')
@@ -242,6 +252,7 @@ def submit_query():
     else:
         return render_template('submit.html', error="Please enter a valid keyword and select a sentiment.")
 
+# Route for processing page, the middle status.
 @app.route('/task-status/<task_id>')
 def task_status(task_id):
     return render_template('processing.html', task_id=task_id)
@@ -260,6 +271,7 @@ def task_result(task_id):
     else:
         return redirect(url_for('task_status', task_id=task_id))
 
+# Route for celery-status, we must have a celery for polling or we would never get the result because of the delay.
 @app.route('/celery-status/<task_id>')
 def celery_task_status(task_id):
     task = AsyncResult(task_id, app=celery)
@@ -278,6 +290,7 @@ def celery_task_status(task_id):
         response['status'] = str(task.info)
     return jsonify(response)
 
+# Route for stream display of LLM (llama3.2)
 @app.route('/stream')
 def stream():
     prompt = request.args.get('prompt')
@@ -285,6 +298,7 @@ def stream():
         return "Prompt is missing.", 400
     return Response(stream_with_context(call_llama_api_stream(prompt)), content_type='text/event-stream')
 
+# Regular llama API by json.
 def call_llama_api_stream(prompt):
     api_url = "http://localhost:11434/api/chat"
     data = {
