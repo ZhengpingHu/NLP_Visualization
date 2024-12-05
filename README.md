@@ -133,7 +133,7 @@ This project relies on the following key libraries and tools:
    A fundamental package for numerical computations in Python. Utilized for handling large arrays and performing mathematical operations.
 
 3. **[spaCy](https://spacy.io/)**  
-   An advanced Natural Language Processing library. Applied for part-of-speech tagging during the TF-IDF keyword extraction process.
+   An advanced Natural Language Processing library. Applied for part-of-speech tagging.
 
 4. **[VADER](https://github.com/cjhutto/vaderSentiment)**  
    A lexicon and rule-based sentiment analysis tool. Used for assigning sentiment scores (positive, negative, neutral) to user comments.
