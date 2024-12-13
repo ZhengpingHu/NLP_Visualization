@@ -114,6 +114,10 @@ NLP_Visualization
 
 2. Default accessing location for the Demo website: [Here](http://192.168.0.246:6612) in `Website_Demo/backend.py`. (Modify [Here](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L375))
 
+## Hint
+Due to capacity limitations, all images in the final Demo were deleted to reduce the size of the compressed package, and the project visualization launched from the compressed package is incomplete.
+To solve this problem, you can find all the content in the previous project Github link.
+
 ## References
 This project relies on the following key libraries and tools:
 
