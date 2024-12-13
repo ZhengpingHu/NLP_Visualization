@@ -12,6 +12,8 @@ The purpose of this project is to use NLP technology to analyze NYT article comm
 
 At the same time, we use the GNN model to analyze the relevance of various words in user comments, and finally combine the results with the local LLM to provide authors with keyword-based writing outlines, which can greatly improve the author's writing efficiency and increase the author's article effect in a targeted manner.
 
+## Complete Project Link on Github:
+https://github.com/ZhengpingHu/NLP_Visualization/
 
 ## Dataset
 Data source: [New York Times Comments dataset](https://www.kaggle.com/datasets/aashita/nyt-comments) (from Kaggle)
