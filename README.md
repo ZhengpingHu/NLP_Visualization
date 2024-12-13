@@ -25,6 +25,11 @@ Create the following folders under the `Data_Analysis_Demo` folder:
 - **`dataset`**: Place all decompressed datasets here.
 - **`models`**: Trained models will be saved in this folder.
 
+## Starting from scratch
+Please use the file step by step under the `Data_Analysis_Demo` folder when you start at new dataset.
+
+Or you can directly start the demo, models already saved in `Data_Analysis_Demo\models` folder.
+
 ## Backend Requirements
 `backend.py` requires the llama 3.2 model. Follow the installation instructions provided [here](https://ollama.com/library/llama3.2).
 
@@ -65,45 +70,35 @@ NLP_Visualization
     Data_Analysis_Demo/  
         dataset/  
         demo/  
-            data_cleaning.py  
-            model_output.py  
-            model_training.py  
-        models/  
-        old_testing_files/  
-            dataset_cleaning.py  
-            GNN_test.py  
-            Inference_model.py  
-            mini_set_cleaning.py  
-            naive_bayes_training.py  
-            pre_cleaning.py  
-            single_article_visualization.py  
-            step1_data_cleaning.py  
+            step1_data_pre-cleaning.py  
+            step2_data_selection.py  
+            step3_GNN_training.py  
+            step4_GNN_replay.py
+        models/
+            gnn_model.pth
+            graph_data.pth
+            index_to_word.pkl
+            word_to_index.pkl
 
     Project_Proposal/  
-        Project.pdf  
-        Recordings/  
-            record 1.m4a  
+        Project.pdf   
 
     Website_Demo/  
         backend.py  
-        LLM_query_test.py  
-        static/  
-            about.html  
-            contact.html  
-            myplot.html  
-            myplot.png  
-            portfolio.html  
-            team.html  
+        celery_worker.py
+        GNN.py
+        static/   
             css/  
             fonts/  
             images/  
         templates/  
-            index.html  
-            result.html  
-            specific.html  
-            submit.html  
-            team_intro.html  
-            wordcloud.html
+            index.html 
+            explor.html  
+            visual.html
+            conclusion.html
+            submit.html
+            processing.html
+            result.html   
 
     Analytics/  
         NLP_Visualization_Comments_step1.ipynb  
@@ -113,15 +108,11 @@ NLP_Visualization
 
 
 ## Usage
-1. Add your datasets in `Data_Analysis_Demo/dataset/`.
-
-2. Add your models in `Data_Analysis_Demo/models/`.
-
-3. Run `start.py` to start the server.
+1. Run `start.py` to start the server.
    ```bash
    python3 start.py
 
-4. Default accessing location for the Demo website: [Here](http://192.168.0.246:6612) in `Website_Demo/backend.py`. (Modify [Here](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L375))
+2. Default accessing location for the Demo website: [Here](http://192.168.0.246:6612) in `Website_Demo/backend.py`. (Modify [Here](https://github.com/ZhengpingHu/NLP_Visualization/blob/main/Website_Demo/backend.py#L375))
 
 ## References
 This project relies on the following key libraries and tools:
