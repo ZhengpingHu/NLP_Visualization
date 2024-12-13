@@ -2,6 +2,7 @@ import subprocess
 import os
 import time
 
+# For easier to start the website demo
 WEBSITE_DEMO_PATH = "./Website_Demo"
 
 def start_celery():
